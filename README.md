@@ -16,12 +16,14 @@ Optional:
 
 # 1. Install PiHole
 Follow the steps outlined here: [Pihole docs](https://docs.pi-hole.net/main/basic-install/)
+make sure you setup your pihole server as the main DNS resolver in your router config.
 
-Create goup:
+# 2. Create goup
 	youtubeOnOff
+![image](https://user-images.githubusercontent.com/14348439/189654135-a2a92bba-8a39-4738-88d8-46ebec3a4b19.png)
 
-Create Clients:
-	make sure to add all devices using youtu
+# 3. Create Clients
+	make sure to add all devices using youtube
 
 
 add domains:  (regex blacklist)
@@ -32,7 +34,8 @@ add domains:  (regex blacklist)
 
 create script to swicth group on Off
 if group is on, devices in the group have youtube blocked. If the roup is off, the devices in the group are set to the "Default" group with no blocking.
-	
+
+```
   #!/bin/bash
 
   #get current group setting
@@ -55,3 +58,5 @@ if group is on, devices in the group have youtube blocked. If the roup is off, t
 
   #Restart relevant pihole services
   pihole restartdns reload-lists
+
+```
