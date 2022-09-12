@@ -4,17 +4,18 @@ Use pihole groups to block access to youtube apps on mobile/alexa/... on your lo
 I use a respberry for the pihole install. This is connected to the router by cable. Following he pihole install, you can also use the pi as a wireless access point, but in my case I have enough wireless stuff going on;)
 
 Steps
-1) Install PiHole
-2) Create Group(s)
-3) Create Clients
-4) Add Domains
-5) Create script (linux)
+1. Install PiHole
+2. Create Group(s)
+3. Create Clients
+4. Add Domains
+5. Create script (linux)
 Optional:
-6a) run script on timer using cron and/or
-6b) create a flow in node-red to do the switching for you
+6a. run script on timer using cron and/or
+6b. create a flow in node-red to do the switching for you
 
 
-install PiHole
+# 1. Install PiHole
+Follow the steps outlined here: [Pihole docs](https://docs.pi-hole.net/main/basic-install/)
 
 Create goup:
 	youtubeOnOff
