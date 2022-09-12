@@ -34,18 +34,20 @@ Make sure to add all devices using youtube to the group created for this earlier
 (\.|^)youtubei\.googleapis\.com$
 (\.|^)youtube\.com$
 ```
+![image](https://user-images.githubusercontent.com/14348439/189656578-4a2eab1b-dac5-4cb6-8c77-329a23608605.png)
 
-# 5. Create script to switch group on Off
+
+# 5. Create script to switch group On or Off
 If group is on, devices in the group have youtube blocked. If the group is off, the devices in the group are set to the "Default" group with no blocking.
 You can do this through the pihole web front-end, but why not use a script:
 
 **sudo nano yourscriptname.sh**
 Paste the below script and update with your details (make sure to comment out the stuff you don't need, logfile? mongodb update?)
-use sqlite to get the group ID of your group: **sqlite3 /etc/pihole/gravity.db "select * from 'group' ;"** (the first number in the outbut is your group ID
+Use sqlite to get the group ID of your group: **sqlite3 /etc/pihole/gravity.db "select * from 'group' ;"** (the first number in the outbut is your group ID
 Save and close
-make executable (**chmod +x yourscriptname.sh**)
+Make executable (**chmod +x yourscriptname.sh**)
 
-
+Now run your script (**./yourscriptname.sh**) and check if it all worked.
 
 ```
   #!/bin/bash
