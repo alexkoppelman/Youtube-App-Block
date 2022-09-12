@@ -9,7 +9,9 @@ Steps
 3. Create Clients
 4. Add Domains
 5. Create script (linux)
+
 Optional:
+
 6a. run script on timer using cron and/or
 6b. create a flow in node-red to do the switching for you
 
@@ -19,21 +21,20 @@ Follow the steps outlined here: [Pihole docs](https://docs.pi-hole.net/main/basi
 make sure you setup your pihole server as the main DNS resolver in your router config.
 
 # 2. Create goup
-	youtubeOnOff
+	create a group for the devices that you'll want to block. Mine's called: youtubeOnOff
 ![image](https://user-images.githubusercontent.com/14348439/189654135-a2a92bba-8a39-4738-88d8-46ebec3a4b19.png)
 
 # 3. Create Clients
-	make sure to add all devices using youtube
+	make sure to add all devices using youtube to the group created for this earlier
+![image](https://user-images.githubusercontent.com/14348439/189654665-c396a904-afa5-4e2b-b893-0378c408f0ca.png)
 
-
-add domains:  (regex blacklist)
-	(\.|^)googlevideo\.com$
+# 4. Add Domains:  (regex blacklist)
+	```(\.|^)googlevideo\.com$
 	(\.|^)youtubei\.googleapis\.com$
-	(\.|^)youtube\.com$
+	(\.|^)youtube\.com$```
 
-
-create script to swicth group on Off
-if group is on, devices in the group have youtube blocked. If the roup is off, the devices in the group are set to the "Default" group with no blocking.
+# 5. Create script to switch group on Off
+if group is on, devices in the group have youtube blocked. If the group is off, the devices in the group are set to the "Default" group with no blocking.
 
 ```
   #!/bin/bash
