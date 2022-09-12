@@ -3,7 +3,7 @@ Use pihole groups to block access to youtube apps on mobile/alexa/... on your lo
 
 I use a Pi 4 for the pihole install. This is connected to the router by cable. Following the pihole install, you can also use the pi as a wireless access point, but in my case I have enough wireless stuff going on;)
 
-Steps
+# Steps
 1. Install PiHole
 2. Create Group(s)
 3. Create Clients
@@ -12,8 +12,8 @@ Steps
 
 Optional:
 
-6a. Run script on timer using cron and/or
-6b. Create a flow in node-red to do the switching for you
+- Run script on timer using cron and/or
+- Create a flow in node-red to do the switching for you
 
 
 # 1. Install PiHole
@@ -64,11 +64,11 @@ Now run your script (**./yourscriptname.sh**) and check if it all worked.
   # change Pihole group setting  - Update with your GroupID
   sudo sqlite3 /etc/pihole/gravity.db "update 'group' set enabled = $enabled WHERE id = '3';"
 
-  # add line to logfile - If needed?
-  echo "YT BlockGroup ${enabled} - ${TIMESTAMP} " >> /home/pi/scripts/toggleYT.log
+  # uncomment if you need this - add line to logfile
+  # echo "YT BlockGroup ${enabled} - ${TIMESTAMP} " >> /home/pi/scripts/toggleYT.log
 
-  # add row to mongodb for logging purposes - If needed?
-  mongo -u admin -p ************ --authenticationDatabase admin 127.0.0.1/IOTdatabase --eval "var document = { status : \"$enabled\", datetime : \"$TIMESTAMP\" }; db.youtubeBlock.insert(document);"
+  # uncomment if you need this - add row to mongodb for logging purposes
+  # mongo -u **your mongodb username** -p ***your mongodb password** --authenticationDatabase admin 127.0.0.1/IOTdatabase --eval "var document = { status : \"$enabled\", datetime : \"$TIMESTAMP\" }; db.youtubeBlock.insert(document);"
 
   #Restart relevant pihole services
   pihole restartdns reload-lists
@@ -85,3 +85,6 @@ Using the dashboard flows, you can easliy create a button and feedback text. I h
 ```
 [{"id":"1ca42ec55694aa29","type":"ui_button","z":"09c0558fa6e0cecd","name":"Switch YT","group":"d9eb2021.565ca8","order":3,"width":0,"height":0,"passthru":false,"label":"--SWITCH--","tooltip":"","color":"","bgcolor":"","className":"","icon":"","payload":"","payloadType":"str","topic":"topic","topicType":"msg","x":160,"y":580,"wires":[["3b3932c5e9cfe466"]]},{"id":"3b3932c5e9cfe466","type":"exec","z":"09c0558fa6e0cecd","command":"/home/pi/toggleYTremote.sh","addpay":"","append":"","useSpawn":"false","timer":"","winHide":false,"oldrc":false,"name":"","x":380,"y":580,"wires":[["358d46a22f0ddeb3"],[],[]]},{"id":"2616311a6e61660b","type":"ui_text","z":"09c0558fa6e0cecd","group":"d9eb2021.565ca8","order":1,"width":0,"height":0,"name":"","label":"Youtube is now","format":"{{msg.payload}}","layout":"row-left","className":"","x":840,"y":580,"wires":[]},{"id":"358d46a22f0ddeb3","type":"function","z":"09c0558fa6e0cecd","name":"","func":"var onoff = msg.payload.slice(-2);\nonoff = Array.from(onoff)[0];\n\nif(onoff == 1) {\n    msg.payload = \"On\"\n} else {\n    msg.payload = \"Off\"\n}\n\n\n\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":620,"y":580,"wires":[["2616311a6e61660b"]]},{"id":"d9eb2021.565ca8","type":"ui_group","name":"YT Control","tab":"208bb4d618807bb5","order":1,"disp":true,"width":"6","collapse":true,"className":""},{"id":"208bb4d618807bb5","type":"ui_tab","name":"YT Control","icon":"dashboard","disabled":false,"hidden":false}]
 ```
+
+## Finally
+Once you have the script working, there are tons of fun things you can do. One idea I might work on is to create a small app/website where kids receive a weekly allowance and pay for their youtube time.
