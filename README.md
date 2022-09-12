@@ -21,29 +21,29 @@ Follow the steps outlined here: [Pihole docs](https://docs.pi-hole.net/main/basi
 make sure you setup your pihole server as the main DNS resolver in your router config.
 
 # 2. Create goup
-	create a group for the devices that you'll want to block. Mine's called: youtubeOnOff
+Create a group for the devices that you'll want to block. Mine's called: youtubeOnOff
 ![image](https://user-images.githubusercontent.com/14348439/189654135-a2a92bba-8a39-4738-88d8-46ebec3a4b19.png)
 
 # 3. Create Clients
-	make sure to add all devices using youtube to the group created for this earlier
+Make sure to add all devices using youtube to the group created for this earlier
 ![image](https://user-images.githubusercontent.com/14348439/189654665-c396a904-afa5-4e2b-b893-0378c408f0ca.png)
 
 # 4. Add Domains:  (regex blacklist)
-	```
-	(\.|^)googlevideo\.com$
-	(\.|^)youtubei\.googleapis\.com$
-	(\.|^)youtube\.com$
-	```
+```
+(\.|^)googlevideo\.com$
+(\.|^)youtubei\.googleapis\.com$
+(\.|^)youtube\.com$
+```
 
 # 5. Create script to switch group on Off
 If group is on, devices in the group have youtube blocked. If the group is off, the devices in the group are set to the "Default" group with no blocking.
 You can do this through the pihole web front-end, but why not use a script:
 
-sudo nano yourscriptname.sh
+**sudo nano yourscriptname.sh**
 Paste the below script and update with your details (make sure to comment out the stuff you don't need, logfile? mongodb update?)
-use sqlite to get the group ID of your group: sqlite3 /etc/pihole/gravity.db "select * from 'group' ;" (the first number in the outbut is your group ID
+use sqlite to get the group ID of your group: **sqlite3 /etc/pihole/gravity.db "select * from 'group' ;"** (the first number in the outbut is your group ID
 Save and close
-make executable (chmod +x yourscriptname.sh)
+make executable (**chmod +x yourscriptname.sh**)
 
 
 
